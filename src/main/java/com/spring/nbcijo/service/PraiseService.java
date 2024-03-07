@@ -19,14 +19,14 @@ public class PraiseService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    public void praisePost(User user, Post post) {
+    public void praisePostOrCancel(User user, Post post) {
         user = userRepository.findById(user.getId()).orElseThrow(() -> new InvalidInputException(
             ErrorCode.USER_NOT_FOUND));
         post = postRepository.findById(post.getId())
             .orElseThrow(() -> new InvalidInputException(ErrorCode.NOT_FOUND_POST));
 
         if (praiseRepository.findByUserAndPost(user, post).isPresent()) {
-            throw new InvalidInputException(ErrorCode.ALREADY_EXISTS);
+            praiseRepository.deleteByUserAndPost(user, post);
         }
         Praise praise = Praise.builder()
             .user(user)
@@ -34,17 +34,5 @@ public class PraiseService {
             .build();
 
         praiseRepository.save(praise);
-    }
-
-    public void cancelToPraise(User user, Post post) {
-        user = userRepository.findById(user.getId()).orElseThrow(() -> new InvalidInputException(
-            ErrorCode.USER_NOT_FOUND));
-        post = postRepository.findById(post.getId())
-            .orElseThrow(() -> new InvalidInputException(ErrorCode.NOT_FOUND_POST));
-
-        if (praiseRepository.findByUserAndPost(user, post).isEmpty()) {
-            throw new InvalidInputException(ErrorCode.NOT_EXISTS);
-        }
-        praiseRepository.deleteByUserAndPost(user, post);
     }
 }
