@@ -1,6 +1,7 @@
 package com.spring.nbcijo.controller;
 
 import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.entity.Comment;
 import com.spring.nbcijo.entity.Post;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import com.spring.nbcijo.service.PraiseService;
@@ -21,14 +22,26 @@ public class PraiseController {
     private final PraiseService praiseService;
 
     @PostMapping("/posts/{postId}")
-    public ResponseEntity<ResponseDto<Void>> praisePost(
+    public ResponseEntity<ResponseDto<Void>> praisePostOrCancel(
         @AuthenticationPrincipal UserDetailsImpl userDetails,
         Post post, @PathVariable Long postId) {
         praiseService.praisePostOrCancel(userDetails.getUser(), post);
         return ResponseEntity.status(HttpStatus.OK)
             .body(ResponseDto.<Void>builder()
                 .statusCode(HttpStatus.OK.value())
-                .message("칭찬 합니다 요청 성공")
+                .message("게시글 칭찬 기능 요청 성공")
+                .build());
+    }
+
+    @PostMapping("/posts/{postId}/{commentId}")
+    public ResponseEntity<ResponseDto<Void>> praiseCommentOrCancel(
+        @AuthenticationPrincipal UserDetailsImpl userDetails, Comment comment,
+        @PathVariable Long postId, @PathVariable Long CommentId) {
+        praiseService.praiseCommentOrCancel(userDetails.getUser(), comment);
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ResponseDto.<Void>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message("댓글 칭찬 기능 요청 성공")
                 .build());
     }
 }

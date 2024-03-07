@@ -1,5 +1,6 @@
 package com.spring.nbcijo.repository;
 
+import com.spring.nbcijo.entity.Comment;
 import com.spring.nbcijo.entity.Post;
 import com.spring.nbcijo.entity.Praise;
 import com.spring.nbcijo.entity.User;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PraiseRepository extends JpaRepository<Praise,Long> {
 
     Optional<Praise> findByUserAndPost(User user, Post post);
-
     void deleteByUserAndPost(User user, Post post);
+    Optional<Praise> findByUserAndComment(User user, Comment comment);
+    void deleteByUserAndComment(User user, Comment comment);
 }
