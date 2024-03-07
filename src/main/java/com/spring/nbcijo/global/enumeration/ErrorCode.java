@@ -14,7 +14,10 @@ public enum ErrorCode {
     REUSED_PASSWORD(BAD_REQUEST, "사용 전적이 있는 비밀번호 입니다."),
     NOT_VALID_USER(BAD_REQUEST, "작성자가 아닙니다"),
     NOT_VALID_POST(BAD_REQUEST, "유효한 게시글이 아닙니다"),
-    NOT_VALID_ADMIN_TOKEN(BAD_REQUEST, "유효한 관리자 토큰이 아닙니다");
+    NOT_VALID_ADMIN_TOKEN(BAD_REQUEST, "유효한 관리자 토큰이 아닙니다"),
+    ALREADY_EXISTS(BAD_REQUEST,"이미 존재합니다."),
+    NOT_EXISTS(BAD_REQUEST,"존재하지 않습니다..");
+
 
     private final HttpStatus status;
     private final String message;

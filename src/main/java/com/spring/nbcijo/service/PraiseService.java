@@ -25,14 +25,14 @@ public class PraiseService {
         postRepository.findById(post.getId())
             .orElseThrow(() -> new InvalidInputException(ErrorCode.NOT_FOUND_POST));
 
-        if(praiseRepository.findByUserAndPost(user, post).isEmpty()){
-            Praise praise = Praise.builder()
-                .user(user)
-                .post(post)
-                .build();
-
-            praiseRepository.save(praise);
+        if (praiseRepository.findByUserAndPost(user, post).isPresent()) {
+            throw new InvalidInputException(ErrorCode.ALREADY_EXISTS);
         }
+        Praise praise = Praise.builder()
+            .user(user)
+            .post(post)
+            .build();
 
+        praiseRepository.save(praise);
     }
 }
