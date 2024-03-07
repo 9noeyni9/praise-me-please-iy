@@ -22,7 +22,7 @@ public class PraiseService {
     public void praisePost(User user, Post post) {
         user = userRepository.findById(user.getId()).orElseThrow(() -> new InvalidInputException(
             ErrorCode.USER_NOT_FOUND));
-        postRepository.findById(post.getId())
+        post = postRepository.findById(post.getId())
             .orElseThrow(() -> new InvalidInputException(ErrorCode.NOT_FOUND_POST));
 
         if (praiseRepository.findByUserAndPost(user, post).isPresent()) {
@@ -34,5 +34,17 @@ public class PraiseService {
             .build();
 
         praiseRepository.save(praise);
+    }
+
+    public void cancelToPraise(User user, Post post) {
+        user = userRepository.findById(user.getId()).orElseThrow(() -> new InvalidInputException(
+            ErrorCode.USER_NOT_FOUND));
+        post = postRepository.findById(post.getId())
+            .orElseThrow(() -> new InvalidInputException(ErrorCode.NOT_FOUND_POST));
+
+        if (praiseRepository.findByUserAndPost(user, post).isEmpty()) {
+            throw new InvalidInputException(ErrorCode.NOT_EXISTS);
+        }
+        praiseRepository.deleteByUserAndPost(user, post);
     }
 }
