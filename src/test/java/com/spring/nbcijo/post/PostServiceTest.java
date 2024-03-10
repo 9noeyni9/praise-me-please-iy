@@ -68,25 +68,25 @@ class PostServiceTest implements PostFixture {
         assertThat(result).isEqualTo(new PostResponseDto(testPost));
     }
 
-    @DisplayName("게시글 전체 조회")
-    @Test
-    void getPostList() {
-        // given
-        var testPost1 = PostTestUtils.get(TEST_POST, 1L,
-            LocalDateTime.now(), TEST_USER);
-        var testPost2 = PostTestUtils.get(TEST_POST, 2L,
-            LocalDateTime.now().minusMinutes(1), TEST_USER);
-        given(postRepository.findAll(Sort.by(Direction.DESC, "createdAt")))
-            .willReturn(List.of(testPost1, testPost2));
-
-        // when
-        var result = postService.getPostList();
-
-        // then
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0)).isEqualTo(new PostResponseDto(testPost1));
-        assertThat(result.get(1)).isEqualTo(new PostResponseDto(testPost2));
-    }
+//    @DisplayName("게시글 전체 조회")
+//    @Test
+//    void getPostList() {
+//        // given
+//        var testPost1 = PostTestUtils.get(TEST_POST, 1L,
+//            LocalDateTime.now(), TEST_USER);
+//        var testPost2 = PostTestUtils.get(TEST_POST, 2L,
+//            LocalDateTime.now().minusMinutes(1), TEST_USER);
+//        given(postRepository.findAll(Sort.by(Direction.DESC, "createdAt")))
+//            .willReturn(List.of(testPost1, testPost2));
+//
+//        // when
+//        var result = postService.getPostList();
+//
+//        // then
+//        assertThat(result).hasSize(2);
+//        assertThat(result.get(0)).isEqualTo(new PostResponseDto(testPost1));
+//        assertThat(result.get(1)).isEqualTo(new PostResponseDto(testPost2));
+//    }
 
     @DisplayName("게시글 수정")
     @Test

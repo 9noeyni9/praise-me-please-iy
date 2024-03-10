@@ -1,18 +1,24 @@
 package com.spring.nbcijo.service;
 
+import static java.util.stream.Collectors.toList;
+
 import com.spring.nbcijo.dto.request.PostRequestDto;
+import com.spring.nbcijo.dto.response.PostListResponseDto;
 import com.spring.nbcijo.dto.response.PostResponseDto;
+import com.spring.nbcijo.dto.response.PostResponseDtoConverter;
 import com.spring.nbcijo.entity.Post;
 import com.spring.nbcijo.entity.User;
+import com.spring.nbcijo.global.dto.request.ListRequestDto;
 import com.spring.nbcijo.global.enumeration.ErrorCode;
 import com.spring.nbcijo.global.exception.InvalidInputException;
+import com.spring.nbcijo.global.util.PagingUtil;
 import com.spring.nbcijo.repository.PostRepository;
 import com.spring.nbcijo.repository.UserRepository;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,12 +48,22 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
-    public List<PostResponseDto> getPostList() {
-        List<Post> postList = postRepository.findAll(Sort.by(Direction.DESC, "createdAt"));
+    public PostListResponseDto getPostList(ListRequestDto listRequestDto) {
+        if (listRequestDto.getColumn() == null) {
+            listRequestDto.setColumn("createdDate");
+        }
 
-        return postList.stream()
-            .map(PostResponseDto::new)
-            .toList();
+        PageRequest pageRequest = PageRequest.of(listRequestDto.getPage(),
+            listRequestDto.getPageSize(), listRequestDto.getSortDirection(),
+            listRequestDto.getColumn());
+        Page<Post> postList = postRepository.findAll(pageRequest);
+        List<PostResponseDto> postResponseDtoList = PostResponseDtoConverter.convertPostToPostResponseDtoList(postList.getContent());
+
+        return PostListResponseDto.builder()
+            .pagingUtil(new PagingUtil(postList.getTotalElements(), postList.getTotalPages(),
+                postList.getNumber(), postList.getSize()))
+            .postResponseDtoList(postResponseDtoList)
+            .build();
     }
 
     @Transactional

@@ -1,8 +1,10 @@
 package com.spring.nbcijo.controller;
 
 import com.spring.nbcijo.dto.request.PostRequestDto;
+import com.spring.nbcijo.dto.response.PostListResponseDto;
 import com.spring.nbcijo.dto.response.PostResponseDto;
 import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.global.dto.request.ListRequestDto;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import com.spring.nbcijo.service.PostService;
 import jakarta.validation.Valid;
@@ -53,14 +55,14 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<ResponseDto<List<PostResponseDto>>> getPostList() {
-        List<PostResponseDto> response = postService.getPostList();
-
+    public ResponseEntity<ResponseDto<PostListResponseDto>> getPostList(
+        ListRequestDto listRequestDto) {
+        PostListResponseDto postListResponseDto = postService.getPostList(listRequestDto);
         return ResponseEntity.status(HttpStatus.OK.value())
-            .body(ResponseDto.<List<PostResponseDto>>builder()
+            .body(ResponseDto.<PostListResponseDto>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("게시글 전체 조회 성공")
-                .data(response)
+                .data(postListResponseDto)
                 .build());
     }
 

@@ -46,6 +46,9 @@ public class User extends Timestamped implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PasswordHistory> passwordHistories = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Praise> praises = new ArrayList<>();
+
     @Builder
     public User(String username, String password, UserRoleEnum role, String description) {
         this.username = username;
