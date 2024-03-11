@@ -1,4 +1,4 @@
-package com.spring.nbcijo.config;
+package com.spring.nbcijo.global.config;
 
 import com.spring.nbcijo.jwt.JwtUtil;
 import com.spring.nbcijo.repository.RefreshTokenBlacklistRepository;

@@ -1,7 +1,7 @@
 package com.spring.nbcijo.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.nbcijo.config.WebSecurityConfig;
+import com.spring.nbcijo.global.config.WebSecurityConfig;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
