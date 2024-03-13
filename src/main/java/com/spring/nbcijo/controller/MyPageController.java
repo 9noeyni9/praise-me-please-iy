@@ -4,8 +4,10 @@ import com.spring.nbcijo.dto.request.UpdateDescriptionRequestDto;
 import com.spring.nbcijo.dto.request.UpdatePasswordRequestDto;
 import com.spring.nbcijo.dto.response.CommentResponseDto;
 import com.spring.nbcijo.dto.response.MyInformResponseDto;
+import com.spring.nbcijo.dto.response.MyPostListResponseDto;
 import com.spring.nbcijo.dto.response.PostResponseDto;
 import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.global.dto.request.ListRequestDto;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import com.spring.nbcijo.service.MyPageService;
 import jakarta.validation.Valid;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -64,11 +67,11 @@ public class MyPageController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<ResponseDto<List<PostResponseDto>>> getMyPosts(
-        @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        List<PostResponseDto> myPostResponseDtos = myPageService.getMyPosts(userDetails.getUser());
-        return ResponseEntity.status(HttpStatus.OK.value())
-            .body(ResponseDto.<List<PostResponseDto>>builder()
+    public ResponseEntity<ResponseDto<MyPostListResponseDto>> getMyPosts(
+        @AuthenticationPrincipal UserDetailsImpl userDetails, @RequestParam ListRequestDto listRequestDto) {
+        MyPostListResponseDto myPostResponseDtos = myPageService.getMyPosts(userDetails.getUser(), listRequestDto);
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ResponseDto.<MyPostListResponseDto>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("내 정보 조회가 완료되었습니다.")
                 .data(myPostResponseDtos).build());

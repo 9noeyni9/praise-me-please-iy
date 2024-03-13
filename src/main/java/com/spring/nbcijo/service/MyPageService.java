@@ -4,13 +4,17 @@ import com.spring.nbcijo.dto.request.UpdateDescriptionRequestDto;
 import com.spring.nbcijo.dto.request.UpdatePasswordRequestDto;
 import com.spring.nbcijo.dto.response.CommentResponseDto;
 import com.spring.nbcijo.dto.response.MyInformResponseDto;
+import com.spring.nbcijo.dto.response.MyPostListResponseDto;
+import com.spring.nbcijo.dto.response.MyPostResponseDto;
 import com.spring.nbcijo.dto.response.PostResponseDto;
 import com.spring.nbcijo.entity.Comment;
 import com.spring.nbcijo.entity.PasswordHistory;
 import com.spring.nbcijo.entity.Post;
 import com.spring.nbcijo.entity.User;
+import com.spring.nbcijo.global.dto.request.ListRequestDto;
 import com.spring.nbcijo.global.enumeration.ErrorCode;
 import com.spring.nbcijo.global.exception.InvalidInputException;
+import com.spring.nbcijo.global.util.PagingUtil;
 import com.spring.nbcijo.repository.CommentRepository;
 import com.spring.nbcijo.repository.PasswordHistoryRepository;
 import com.spring.nbcijo.repository.PostRepository;
@@ -21,6 +25,9 @@ import java.nio.channels.Channel;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -79,10 +86,13 @@ public class MyPageService {
         passwordHistoryRepository.save(newPasswordHistory);
     }
 
-    public List<PostResponseDto> getMyPosts(User user) {
-        List<Post> postList = postRepository.findAllByUserIdOrderByCreatedAtDesc(user.getId());
-        return postList.stream().map(PostResponseDto::new).collect(
-            Collectors.toList());
+    public MyPostListResponseDto getMyPosts(User user, ListRequestDto listRequestDto) {
+        Page<MyPostResponseDto> myPostList = postRepository.findAllMyPost(user.getId(), PageRequest.of(listRequestDto.getPage(),
+            listRequestDto.getPageSize()));
+        return MyPostListResponseDto.builder()
+            .pagingUtil(new PagingUtil(myPostList.getTotalElements(),myPostList.getTotalPages(),myPostList.getNumber(),myPostList.getSize()))
+            .myPostList(myPostList.stream().collect(Collectors.toList()))
+            .build();
     }
 
     public List<CommentResponseDto> getMyComments(User user) {
