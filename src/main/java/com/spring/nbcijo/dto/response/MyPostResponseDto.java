@@ -7,16 +7,18 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@Builder
 public class MyPostResponseDto {
 
+    private Long postId;
     private String username;
     private String title;
     private String content;
     private LocalDateTime createdAt;
 
-    @Builder
-    public MyPostResponseDto(String username, String title, String content,
+    public MyPostResponseDto(Long postId, String username, String title, String content,
         LocalDateTime createdAt) {
+        this.postId = postId;
         this.username = username;
         this.title = title;
         this.content = content;

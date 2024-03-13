@@ -14,5 +14,5 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class PostListResponseDto extends ListResponseDto {
 
-    private List<PostResponseDto> postResponseDtoList;
+    private List<PostResponseDto> postList;
 }

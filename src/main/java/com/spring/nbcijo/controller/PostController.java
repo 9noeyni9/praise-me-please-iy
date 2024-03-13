@@ -1,5 +1,6 @@
 package com.spring.nbcijo.controller;
 
+import com.spring.nbcijo.dto.request.PostListRequestDto;
 import com.spring.nbcijo.dto.request.PostRequestDto;
 import com.spring.nbcijo.dto.response.PostListResponseDto;
 import com.spring.nbcijo.dto.response.PostResponseDto;
@@ -56,8 +57,8 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<ResponseDto<PostListResponseDto>> getPostList(
-        ListRequestDto listRequestDto) {
-        PostListResponseDto postListResponseDto = postService.getPostList(listRequestDto);
+        PostListRequestDto postListRequestDto) {
+        PostListResponseDto postListResponseDto = postService.getPostList(postListRequestDto);
         return ResponseEntity.status(HttpStatus.OK.value())
             .body(ResponseDto.<PostListResponseDto>builder()
                 .statusCode(HttpStatus.OK.value())

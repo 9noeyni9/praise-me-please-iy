@@ -23,9 +23,9 @@ public class ListRequestDto {
 
     private String column;
 
-    public void setPage(Integer page){
+    public void setPage(Integer page) {
         this.page = page - 1;
-        if (page < 10){
+        if (page < 10) {
             this.page = 10;
         }
     }
