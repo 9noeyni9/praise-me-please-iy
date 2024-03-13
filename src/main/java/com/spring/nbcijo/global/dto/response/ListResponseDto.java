@@ -10,5 +10,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ListResponseDto {
+
     private PagingUtil pagingUtil;
 }

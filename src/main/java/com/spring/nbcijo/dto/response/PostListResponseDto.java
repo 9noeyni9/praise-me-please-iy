@@ -1,6 +1,5 @@
 package com.spring.nbcijo.dto.response;
 
-import com.spring.nbcijo.entity.Post;
 import com.spring.nbcijo.global.dto.response.ListResponseDto;
 import java.util.List;
 import lombok.AllArgsConstructor;

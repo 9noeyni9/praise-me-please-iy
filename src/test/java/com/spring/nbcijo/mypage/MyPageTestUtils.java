@@ -22,14 +22,14 @@ public class MyPageTestUtils {
         return newPasswordHistory;
     }
 
-    public static User get(User user){
-        return get(user,1L,LocalDateTime.now());
+    public static User get(User user) {
+        return get(user, 1L, LocalDateTime.now());
     }
 
     public static User get(User user, long id, LocalDateTime createdAt) {
         var newUser = SerializationUtils.clone(user);
-        ReflectionTestUtils.setField(newUser, "id",id,Long.class);
-        ReflectionTestUtils.setField(newUser, "createdAt",createdAt, LocalDateTime.class);
+        ReflectionTestUtils.setField(newUser, "id", id, Long.class);
+        ReflectionTestUtils.setField(newUser, "createdAt", createdAt, LocalDateTime.class);
         return newUser;
     }
 

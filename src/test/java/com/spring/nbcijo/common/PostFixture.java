@@ -21,7 +21,7 @@ public interface PostFixture extends UserFixture {
         .content(TEST_POST_CONTENT)
         .user(TEST_USER)
         .build();
-  
+
     Post TEST_ANOTHER_POST = Post.builder()
         .title(ANOTHER_PREFIX + TEST_POST_TITLE)
         .content(ANOTHER_PREFIX + TEST_POST_CONTENT)

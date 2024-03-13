@@ -1,21 +1,16 @@
 package com.spring.nbcijo.service;
 
-import static java.util.stream.Collectors.toList;
-
 import com.spring.nbcijo.dto.request.PostListRequestDto;
 import com.spring.nbcijo.dto.request.PostRequestDto;
 import com.spring.nbcijo.dto.response.PostListResponseDto;
 import com.spring.nbcijo.dto.response.PostResponseDto;
-import com.spring.nbcijo.dto.response.PostResponseDtoConverter;
 import com.spring.nbcijo.entity.Post;
 import com.spring.nbcijo.entity.User;
-import com.spring.nbcijo.global.dto.request.ListRequestDto;
 import com.spring.nbcijo.global.enumeration.ErrorCode;
 import com.spring.nbcijo.global.exception.InvalidInputException;
 import com.spring.nbcijo.global.util.PagingUtil;
 import com.spring.nbcijo.repository.PostRepository;
 import com.spring.nbcijo.repository.UserRepository;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -58,8 +53,11 @@ public class PostService {
         PageRequest pageRequest = PageRequest.of(postListRequestDto.getPage(),
             postListRequestDto.getPageSize(), postListRequestDto.getSortDirection(),
             postListRequestDto.getColumn());
-        Page<PostResponseDto> postList = postRepository.findAllPost(pageRequest);
-        PostListResponseDto postListResponseDto = PostListResponseDto.builder().pagingUtil(new PagingUtil(postList.getTotalElements(),postList.getTotalPages(),postList.getNumber(),postList.getSize())).postList(postList.stream().collect(
+        Page<PostResponseDto> postList = postRepository.findAllPost(postListRequestDto,
+            pageRequest);
+        PostListResponseDto postListResponseDto = PostListResponseDto.builder().pagingUtil(
+            new PagingUtil(postList.getTotalElements(), postList.getTotalPages(),
+                postList.getNumber(), postList.getSize())).postList(postList.stream().collect(
             Collectors.toList())).build();
         return postListResponseDto;
     }

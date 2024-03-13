@@ -20,7 +20,7 @@ public class PagingUtil {
     public PagingUtil(long totalElements, int totalPages, int pageNumber, int pageSize) {
         this.totalElements = totalElements;
         this.totalPages = totalPages;
-        this.pageNumber = pageNumber+1;
+        this.pageNumber = pageNumber + 1;
         this.pageSize = pageSize;
         this.totalPageGroups = setTotalPageGroups();
         this.pageGroup = setPageGroup();
@@ -30,8 +30,8 @@ public class PagingUtil {
         this.existNextPageGroup = setExistNextPageGroup();
     }
 
-    public int setTotalPageGroups(){
-        if(this.totalPages % this.pageGroupSize == 0){
+    public int setTotalPageGroups() {
+        if (this.totalPages % this.pageGroupSize == 0) {
             return this.totalPages / this.pageGroupSize;
         }
         return this.totalPages / this.pageGroupSize + 1;

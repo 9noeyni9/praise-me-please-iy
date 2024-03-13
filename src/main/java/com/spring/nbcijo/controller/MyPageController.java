@@ -1,13 +1,12 @@
 package com.spring.nbcijo.controller;
 
+import com.spring.nbcijo.dto.request.PostListRequestDto;
 import com.spring.nbcijo.dto.request.UpdateDescriptionRequestDto;
 import com.spring.nbcijo.dto.request.UpdatePasswordRequestDto;
 import com.spring.nbcijo.dto.response.CommentResponseDto;
 import com.spring.nbcijo.dto.response.MyInformResponseDto;
 import com.spring.nbcijo.dto.response.MyPostListResponseDto;
-import com.spring.nbcijo.dto.response.PostResponseDto;
 import com.spring.nbcijo.dto.response.ResponseDto;
-import com.spring.nbcijo.global.dto.request.ListRequestDto;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import com.spring.nbcijo.service.MyPageService;
 import jakarta.validation.Valid;
@@ -68,8 +67,10 @@ public class MyPageController {
 
     @GetMapping("/posts")
     public ResponseEntity<ResponseDto<MyPostListResponseDto>> getMyPosts(
-        @AuthenticationPrincipal UserDetailsImpl userDetails, @RequestParam ListRequestDto listRequestDto) {
-        MyPostListResponseDto myPostResponseDtos = myPageService.getMyPosts(userDetails.getUser(), listRequestDto);
+        @AuthenticationPrincipal UserDetailsImpl userDetails,
+        @RequestParam PostListRequestDto postListRequestDto) {
+        MyPostListResponseDto myPostResponseDtos = myPageService.getMyPosts(userDetails.getUser(),
+            postListRequestDto);
         return ResponseEntity.status(HttpStatus.OK)
             .body(ResponseDto.<MyPostListResponseDto>builder()
                 .statusCode(HttpStatus.OK.value())

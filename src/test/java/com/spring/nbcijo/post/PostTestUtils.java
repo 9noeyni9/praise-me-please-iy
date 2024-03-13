@@ -20,7 +20,8 @@ public class PostTestUtils {
     ) {
         var newPost = SerializationUtils.clone(post);
         ReflectionTestUtils.setField(newPost, Post.class, "id", id, Long.class);
-        ReflectionTestUtils.setField(newPost, Post.class, "createdAt", createdAt, LocalDateTime.class);
+        ReflectionTestUtils.setField(newPost, Post.class, "createdAt", createdAt,
+            LocalDateTime.class);
         ReflectionTestUtils.setField(newPost, "user", user, User.class);
         return newPost;
 

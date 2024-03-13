@@ -34,7 +34,7 @@ public class MyPageRequestDtoTest {
 
         @DisplayName("잘못된 형식의 비밀번호 변경 요청-실패")
         @Test
-        void updatePasswordRequestDto_fail(){
+        void updatePasswordRequestDto_fail() {
             // given
             var updatePasswordRequestDto = TEST_PASSWORD_UPDATE_REQUEST_FAIL;
 

@@ -8,16 +8,10 @@ import com.spring.nbcijo.repository.PasswordHistoryRepository;
 import com.spring.nbcijo.repository.RefreshTokenBlacklistRepository;
 import com.spring.nbcijo.repository.UserRepository;
 import com.spring.nbcijo.service.UserService;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 

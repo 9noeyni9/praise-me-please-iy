@@ -18,7 +18,7 @@ public class MyInformResponseDto {
     private String description;
 
     @Builder
-    public MyInformResponseDto(User user){
+    public MyInformResponseDto(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
         this.role = user.getRole();

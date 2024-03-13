@@ -24,7 +24,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 @WebMvcTest(MyPageController.class)
-class MyPageControllerTest extends ControllerTest implements UserFixture, PostFixture ,
+class MyPageControllerTest extends ControllerTest implements UserFixture, PostFixture,
     CommentFixture {
 
     @MockBean
@@ -108,7 +108,8 @@ class MyPageControllerTest extends ControllerTest implements UserFixture, PostFi
         // then
         action.andExpect(status().isOk())
             .andExpect(
-                jsonPath("$.data[*].content",hasItems(TEST_COMMENT_CONTENT,TEST_ANOTHER_COMMENT.getContent())))
+                jsonPath("$.data[*].content",
+                    hasItems(TEST_COMMENT_CONTENT, TEST_ANOTHER_COMMENT.getContent())))
             .andDo(print());
     }
 

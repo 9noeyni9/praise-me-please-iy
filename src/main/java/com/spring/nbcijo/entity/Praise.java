@@ -24,15 +24,15 @@ public class Praise {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="post_id")
+    @JoinColumn(name = "post_id")
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name="comment_id")
+    @JoinColumn(name = "comment_id")
     private Comment comment;
 
     @Builder
-    public Praise(User user, Post post, Comment comment){
+    public Praise(User user, Post post, Comment comment) {
         this.user = user;
         this.post = post;
         this.comment = comment;

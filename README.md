@@ -1,7 +1,7 @@
 # 개요
 
 - 프로젝트 이름: 칭찬해주세요
-- 프로젝트 설명: 모든 내용에 칭찬만 해야 하는 사이트입니다. 
+- 프로젝트 설명: 모든 내용에 칭찬만 해야 하는 사이트입니다.
     - 주요 기능
         - 회원가입 및 로그인/로그아웃
         - 커뮤니티 기능(게시글, 댓글)
@@ -31,7 +31,6 @@
 
 !![Pasted image 20240229093249](https://github.com/nbc-ijo/nbc-ijo/assets/135244018/c0f4b1e7-fbc9-47f1-98da-c04e5f57c9ce)
 
-
 ## API 명세
 
 [API 명세 링크](https://teamsparta.notion.site/I-6f97fc62876f42efaba6b433419fc477)
@@ -40,9 +39,8 @@
 
 ![Pasted image 20240229093736](https://github.com/nbc-ijo/nbc-ijo/assets/135244018/c0949346-598c-403e-ad56-22a9e5d47abe)
 
-
-
 ## 환경 변수
+
 ```
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.hibernate.ddl-auto=update
