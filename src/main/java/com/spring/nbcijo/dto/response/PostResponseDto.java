@@ -3,7 +3,6 @@ package com.spring.nbcijo.dto.response;
 
 import com.spring.nbcijo.entity.Post;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 public class PostResponseDto {
@@ -28,5 +26,14 @@ public class PostResponseDto {
         this.content = post.getContent();
         this.createAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
+    }
+
+    public PostResponseDto(Long id, String title, String content, LocalDateTime createAt,
+        LocalDateTime modifiedAt) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.createAt = createAt;
+        this.modifiedAt = modifiedAt;
     }
 }
