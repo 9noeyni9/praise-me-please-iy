@@ -7,14 +7,13 @@ import com.spring.nbcijo.dto.response.PostResponseDto;
 import com.spring.nbcijo.entity.User;
 
 public interface PostService {
+    PostResponseDto createPost(PostRequestDto requestDto, User user);
 
-    public PostResponseDto createPost(PostRequestDto requestDto, User user);
+    PostResponseDto getPost(Long postId);
 
-    public PostResponseDto getPost(Long postId);
+    PostListResponseDto getPostList(PostListRequestDto postListRequestDto);
 
-    public PostListResponseDto getPostList(PostListRequestDto postListRequestDto);
+    void updatePost(Long postId, PostRequestDto requestDto, User user);
 
-    public void updatePost(Long postId, PostRequestDto requestDto, User user);
-
-    public void deletePost(Long postId, User user);
+    void deletePost(Long postId, User user);
 }

@@ -1,6 +1,8 @@
 package com.spring.nbcijo.service;
 
+import com.spring.nbcijo.dto.request.CommentListRequestDto;
 import com.spring.nbcijo.dto.request.CommentRequestDto;
+import com.spring.nbcijo.dto.response.CommentListResponseDto;
 import com.spring.nbcijo.dto.response.CommentResponseDto;
 import com.spring.nbcijo.entity.User;
 
@@ -8,12 +10,12 @@ import java.util.List;
 
 public interface CommentService {
 
-    public void createComment(User user, Long postId, CommentRequestDto requestDto);
+    void createComment(User user, Long postId, CommentRequestDto requestDto);
 
-    public List<CommentResponseDto> getComments(Long postId);
+    CommentListResponseDto getComments(Long postId, CommentListRequestDto commentListRequestDto);
 
-    public void updateComment(User user, Long postId, Long commentId,
+    void updateComment(User user, Long postId, Long commentId,
                               CommentRequestDto requestDto);
 
-    public void deleteComment(User user, Long postId, Long commentId);
+    void deleteComment(User user, Long postId, Long commentId);
 }

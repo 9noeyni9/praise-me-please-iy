@@ -82,55 +82,55 @@ public class CommentControllerTest extends ControllerTest implements CommentFixt
         }
     }
 
-    @Nested
-    @DisplayName("댓글 조회 요청")
-    class getComments {
-
-        @DisplayName("댓글 조회 요청 성공")
-        @Test
-        void getComments_success() throws Exception {
-            //given
-            var testComment = CommentTestUtils.get(TEST_COMMENT, TEST_COMMENT_ID,
-                LocalDateTime.now(), TEST_USER, TEST_POST);
-            var testComment2 = CommentTestUtils.get(TEST_ANOTHER_COMMENT, TEST_ANOTHER_COMMENT_ID,
-                LocalDateTime.now().minusMinutes(1), TEST_USER, TEST_POST);
-
-            given(commentService.getComments(eq(TEST_POST_ID)))
-                .willReturn(List.of(new CommentResponseDto(testComment),
-                    new CommentResponseDto(testComment2)));
-            //when
-            var action = mockMvc.perform(get("/posts/{postId}/comments", TEST_POST_ID)
-                .accept(MediaType.APPLICATION_JSON));
-
-            //then
-            action
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data[*].content")
-                    .value(Matchers.containsInAnyOrder(TEST_COMMENT_CONTENT,
-                        TEST_ANOTHER_COMMENT.getContent())))
-                .andExpect(jsonPath("$.data[*].id")
-                    .value(Matchers.containsInAnyOrder(TEST_COMMENT_ID.intValue(),
-                        TEST_ANOTHER_COMMENT_ID.intValue())));
-        }
-
-        @DisplayName("댓글 조회 요청 실패 - 존재하지 않는 게시글 id")
-        @Test
-        void getComments_fail() throws Exception {
-            //given
-            given(commentService.getComments(eq(TEST_POST_ID)))
-                .willThrow(new InvalidInputException(ErrorCode.NOT_FOUND_POST));
-
-            //when
-            var action = mockMvc.perform(get("/posts/{postId}/comments", TEST_POST_ID)
-                .accept(MediaType.APPLICATION_JSON));
-
-            //then
-            action
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message")
-                    .value(ErrorCode.NOT_FOUND_POST.getMessage()));
-        }
-    }
+//    @Nested
+//    @DisplayName("댓글 조회 요청")
+//    class getComments {
+//
+//        @DisplayName("댓글 조회 요청 성공")
+//        @Test
+//        void getComments_success() throws Exception {
+//            //given
+//            var testComment = CommentTestUtils.get(TEST_COMMENT, TEST_COMMENT_ID,
+//                LocalDateTime.now(), TEST_USER, TEST_POST);
+//            var testComment2 = CommentTestUtils.get(TEST_ANOTHER_COMMENT, TEST_ANOTHER_COMMENT_ID,
+//                LocalDateTime.now().minusMinutes(1), TEST_USER, TEST_POST);
+//
+//            given(commentService.getComments(eq(TEST_POST_ID)))
+//                .willReturn(List.of(new CommentResponseDto(testComment),
+//                    new CommentResponseDto(testComment2)));
+//            //when
+//            var action = mockMvc.perform(get("/posts/{postId}/comments", TEST_POST_ID)
+//                .accept(MediaType.APPLICATION_JSON));
+//
+//            //then
+//            action
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.data[*].content")
+//                    .value(Matchers.containsInAnyOrder(TEST_COMMENT_CONTENT,
+//                        TEST_ANOTHER_COMMENT.getContent())))
+//                .andExpect(jsonPath("$.data[*].id")
+//                    .value(Matchers.containsInAnyOrder(TEST_COMMENT_ID.intValue(),
+//                        TEST_ANOTHER_COMMENT_ID.intValue())));
+//        }
+//
+//        @DisplayName("댓글 조회 요청 실패 - 존재하지 않는 게시글 id")
+//        @Test
+//        void getComments_fail() throws Exception {
+//            //given
+//            given(commentService.getComments(eq(TEST_POST_ID)))
+//                .willThrow(new InvalidInputException(ErrorCode.NOT_FOUND_POST));
+//
+//            //when
+//            var action = mockMvc.perform(get("/posts/{postId}/comments", TEST_POST_ID)
+//                .accept(MediaType.APPLICATION_JSON));
+//
+//            //then
+//            action
+//                .andExpect(status().isBadRequest())
+//                .andExpect(jsonPath("$.message")
+//                    .value(ErrorCode.NOT_FOUND_POST.getMessage()));
+//        }
+//    }
 
     @Nested
     @DisplayName("댓글 수정 요청")

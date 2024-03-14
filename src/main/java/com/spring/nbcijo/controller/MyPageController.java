@@ -1,16 +1,13 @@
 package com.spring.nbcijo.controller;
 
+import com.spring.nbcijo.dto.request.CommentListRequestDto;
 import com.spring.nbcijo.dto.request.PostListRequestDto;
 import com.spring.nbcijo.dto.request.UpdateDescriptionRequestDto;
 import com.spring.nbcijo.dto.request.UpdatePasswordRequestDto;
-import com.spring.nbcijo.dto.response.CommentResponseDto;
-import com.spring.nbcijo.dto.response.MyInformResponseDto;
-import com.spring.nbcijo.dto.response.MyPostListResponseDto;
-import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.dto.response.*;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import com.spring.nbcijo.service.MyPageService;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,12 +76,13 @@ public class MyPageController {
     }
 
     @GetMapping("/comments")
-    public ResponseEntity<ResponseDto<List<CommentResponseDto>>> getMyComments(
-        @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        List<CommentResponseDto> myCommentsResponseDtos = myPageService.getMyComments(
-            userDetails.getUser());
+    public ResponseEntity<ResponseDto<MyCommentListResponseDto>> getMyComments(
+            @AuthenticationPrincipal UserDetailsImpl userDetails,
+            @RequestParam CommentListRequestDto commentListRequestDto) {
+        MyCommentListResponseDto myCommentsResponseDtos = myPageService.getMyComments(
+            userDetails.getUser(), commentListRequestDto);
         return ResponseEntity.status(HttpStatus.OK.value())
-            .body(ResponseDto.<List<CommentResponseDto>>builder()
+            .body(ResponseDto.<MyCommentListResponseDto>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("내 정보 조회가 완료되었습니다.")
                 .data(myCommentsResponseDtos).build());

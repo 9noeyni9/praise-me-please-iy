@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class PostServiceImpl {
+public class PostServiceImpl implements PostService{
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
@@ -57,11 +57,10 @@ public class PostServiceImpl {
                 postListRequestDto.getColumn());
         Page<PostResponseDto> postList = postRepository.findAllPost(postListRequestDto,
                 pageRequest);
-        PostListResponseDto postListResponseDto = PostListResponseDto.builder().pagingUtil(
+        return PostListResponseDto.builder().pagingUtil(
                 new PagingUtil(postList.getTotalElements(), postList.getTotalPages(),
                         postList.getNumber(), postList.getSize())).postList(postList.stream().collect(
                 Collectors.toList())).build();
-        return postListResponseDto;
     }
 
     public void updatePost(Long postId, PostRequestDto requestDto, User user) {

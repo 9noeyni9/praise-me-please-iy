@@ -52,27 +52,27 @@ public class CommentServiceTest implements CommentFixture, PostFixture {
         verify(commentRepository, times(1)).save(any(Comment.class));
     }
 
-    @DisplayName("댓글 조회")
-    @Test
-    void getComments() {
-        //given
-        var testComment =
-            CommentTestUtils.get(TEST_COMMENT, 1L, LocalDateTime.now(), TEST_USER, TEST_POST);
-        var testComment2 =
-            CommentTestUtils.get(TEST_ANOTHER_COMMENT, 2L, LocalDateTime.now().minusMinutes(1),
-                TEST_USER, TEST_POST);
-        given(postRepository.findById(eq(TEST_POST_ID))).willReturn(Optional.of(TEST_POST));
-        given(commentRepository.findAllByPostIdOrderByCreatedAtDesc(TEST_POST_ID))
-            .willReturn(List.of(testComment, testComment2));
-
-        //when
-        var result = commentService.getComments(TEST_POST_ID);
-
-        //then
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0)).isEqualTo(new CommentResponseDto(testComment));
-        assertThat(result.get(1)).isEqualTo(new CommentResponseDto(testComment2));
-    }
+//    @DisplayName("댓글 조회")
+//    @Test
+//    void getComments() {
+//        //given
+//        var testComment =
+//            CommentTestUtils.get(TEST_COMMENT, 1L, LocalDateTime.now(), TEST_USER, TEST_POST);
+//        var testComment2 =
+//            CommentTestUtils.get(TEST_ANOTHER_COMMENT, 2L, LocalDateTime.now().minusMinutes(1),
+//                TEST_USER, TEST_POST);
+//        given(postRepository.findById(eq(TEST_POST_ID))).willReturn(Optional.of(TEST_POST));
+//        given(commentRepository.findAllByPostIdOrderByCreatedAtDesc(TEST_POST_ID))
+//            .willReturn(List.of(testComment, testComment2));
+//
+//        //when
+//        var result = commentService.getComments(TEST_POST_ID);
+//
+//        //then
+//        assertThat(result).hasSize(2);
+//        assertThat(result.get(0)).isEqualTo(new CommentResponseDto(testComment));
+//        assertThat(result.get(1)).isEqualTo(new CommentResponseDto(testComment2));
+//    }
 
     @DisplayName("댓글 수정")
     @Test

@@ -1,13 +1,7 @@
 package com.spring.nbcijo.service;
 
-import com.spring.nbcijo.dto.request.PostListRequestDto;
-import com.spring.nbcijo.dto.request.UpdateDescriptionRequestDto;
-import com.spring.nbcijo.dto.request.UpdatePasswordRequestDto;
-import com.spring.nbcijo.dto.response.CommentResponseDto;
-import com.spring.nbcijo.dto.response.MyInformResponseDto;
-import com.spring.nbcijo.dto.response.MyPostListResponseDto;
-import com.spring.nbcijo.dto.response.MyPostResponseDto;
-import com.spring.nbcijo.entity.Comment;
+import com.spring.nbcijo.dto.request.*;
+import com.spring.nbcijo.dto.response.*;
 import com.spring.nbcijo.entity.PasswordHistory;
 import com.spring.nbcijo.entity.User;
 import com.spring.nbcijo.global.enumeration.ErrorCode;
@@ -102,10 +96,20 @@ public class MyPageServiceImpl implements MyPageService{
     }
 
     @Override
-    public List<CommentResponseDto> getMyComments(User user) {
-        List<Comment> list = commentRepository.findAllByUserIdOrderByCreatedAtDesc(user.getId());
-        return list.stream().map(CommentResponseDto::new).collect(
-            Collectors.toList());
+    public MyCommentListResponseDto getMyComments(User user, CommentListRequestDto commentListRequestDto) {
+        if (commentListRequestDto.getColumn() == null) {
+            commentListRequestDto.setColumn("createdDate");
+        }
+
+        PageRequest pageRequest = PageRequest.of(commentListRequestDto.getPage(),
+                commentListRequestDto.getPageSize(), commentListRequestDto.getSortDirection(),
+                commentListRequestDto.getColumn());
+        Page<MyCommentResponseDto> myCommentList = commentRepository.findAllMyComment(user.getId(),commentListRequestDto, pageRequest);
+        return MyCommentListResponseDto.builder()
+                .pagingUtil(new PagingUtil(myCommentList.getTotalElements(), myCommentList.getTotalPages(),
+                        myCommentList.getNumber(), myCommentList.getSize()))
+                .myCommentList(myCommentList.stream().collect(Collectors.toList()))
+                .build();
     }
 
     private boolean isPasswordMatches(String passwordInDB, String inputPassword) {
