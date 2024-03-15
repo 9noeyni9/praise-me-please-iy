@@ -1,4 +1,4 @@
-package com.spring.nbcijo.dto.response;
+package com.spring.nbcijo.global.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

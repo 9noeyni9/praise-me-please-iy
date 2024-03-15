@@ -4,7 +4,7 @@ import com.spring.nbcijo.dto.request.PostListRequestDto;
 import com.spring.nbcijo.dto.request.PostRequestDto;
 import com.spring.nbcijo.dto.response.PostListResponseDto;
 import com.spring.nbcijo.dto.response.PostResponseDto;
-import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.global.dto.response.ResponseDto;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import com.spring.nbcijo.service.PostService;
 import jakarta.validation.Valid;
@@ -58,6 +58,7 @@ public class PostController {
     public ResponseEntity<ResponseDto<PostListResponseDto>> getPostList(
         @ModelAttribute PostListRequestDto postListRequestDto) {
         PostListResponseDto postListResponseDto = postService.getPostList(postListRequestDto);
+        System.out.println(postListResponseDto);
         return ResponseEntity.status(HttpStatus.OK.value())
             .body(ResponseDto.<PostListResponseDto>builder()
                 .statusCode(HttpStatus.OK.value())

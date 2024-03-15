@@ -1,7 +1,7 @@
 package com.spring.nbcijo.controller;
 
 import com.spring.nbcijo.dto.request.SignupRequestDto;
-import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.global.dto.response.ResponseDto;
 import com.spring.nbcijo.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

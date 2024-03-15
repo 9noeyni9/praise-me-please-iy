@@ -1,7 +1,7 @@
 package com.spring.nbcijo.controller;
 
 import com.spring.nbcijo.dto.request.AdminRegisterRequestDto;
-import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.global.dto.response.ResponseDto;
 import com.spring.nbcijo.dto.response.UserResponseDto;
 import com.spring.nbcijo.service.AdminService;
 import jakarta.validation.Valid;

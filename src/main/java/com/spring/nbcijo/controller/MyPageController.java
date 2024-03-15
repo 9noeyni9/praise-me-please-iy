@@ -5,6 +5,7 @@ import com.spring.nbcijo.dto.request.PostListRequestDto;
 import com.spring.nbcijo.dto.request.UpdateDescriptionRequestDto;
 import com.spring.nbcijo.dto.request.UpdatePasswordRequestDto;
 import com.spring.nbcijo.dto.response.*;
+import com.spring.nbcijo.global.dto.response.ResponseDto;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import com.spring.nbcijo.service.MyPageService;
 import jakarta.validation.Valid;
@@ -12,12 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -65,7 +61,7 @@ public class MyPageController {
     @GetMapping("/posts")
     public ResponseEntity<ResponseDto<MyPostListResponseDto>> getMyPosts(
         @AuthenticationPrincipal UserDetailsImpl userDetails,
-        @RequestParam PostListRequestDto postListRequestDto) {
+        @ModelAttribute PostListRequestDto postListRequestDto) {
         MyPostListResponseDto myPostResponseDtos = myPageService.getMyPosts(userDetails.getUser(),
             postListRequestDto);
         return ResponseEntity.status(HttpStatus.OK)
@@ -78,7 +74,7 @@ public class MyPageController {
     @GetMapping("/comments")
     public ResponseEntity<ResponseDto<MyCommentListResponseDto>> getMyComments(
             @AuthenticationPrincipal UserDetailsImpl userDetails,
-            @RequestParam CommentListRequestDto commentListRequestDto) {
+            @ModelAttribute CommentListRequestDto commentListRequestDto) {
         MyCommentListResponseDto myCommentsResponseDtos = myPageService.getMyComments(
             userDetails.getUser(), commentListRequestDto);
         return ResponseEntity.status(HttpStatus.OK.value())

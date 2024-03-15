@@ -3,7 +3,7 @@ package com.spring.nbcijo.controller;
 import com.spring.nbcijo.dto.request.CommentListRequestDto;
 import com.spring.nbcijo.dto.request.CommentRequestDto;
 import com.spring.nbcijo.dto.response.CommentListResponseDto;
-import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.global.dto.response.ResponseDto;
 import com.spring.nbcijo.security.UserDetailsImpl;
 import com.spring.nbcijo.service.CommentService;
 import jakarta.validation.Valid;

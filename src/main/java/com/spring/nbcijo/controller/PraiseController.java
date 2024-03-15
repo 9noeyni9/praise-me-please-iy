@@ -1,6 +1,6 @@
 package com.spring.nbcijo.controller;
 
-import com.spring.nbcijo.dto.response.ResponseDto;
+import com.spring.nbcijo.global.dto.response.ResponseDto;
 import com.spring.nbcijo.entity.Comment;
 import com.spring.nbcijo.entity.Post;
 import com.spring.nbcijo.security.UserDetailsImpl;

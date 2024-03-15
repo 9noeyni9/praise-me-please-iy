@@ -50,6 +50,7 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
         Pageable pageable) {
         List<MyPostResponseDto> list = jpaQueryFactory
             .select(Projections.constructor(MyPostResponseDto.class,
+                post.id.as("postId"),
                 post.title,
                 post.content,
                 post.createdAt,

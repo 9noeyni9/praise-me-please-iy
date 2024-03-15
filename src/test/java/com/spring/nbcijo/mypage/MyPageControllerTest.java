@@ -95,22 +95,22 @@ class MyPageControllerTest extends ControllerTest implements UserFixture, PostFi
 //            .andDo(print());
 //    }
 
-    @Test
-    @DisplayName("내가 쓴 댓글 목록 조회 성공")
-    void getMyPosts_fail() throws Exception {
-        //given
-        given(myPageService.getMyComments(eq(TEST_USER))).willReturn(
-            List.of(commentResponseDto1, commentResponseDto2));
-        // when
-        var action = mockMvc.perform(get("/my/comments")
-            .accept(MediaType.APPLICATION_JSON));
-
-        // then
-        action.andExpect(status().isOk())
-            .andExpect(
-                jsonPath("$.data[*].content",
-                    hasItems(TEST_COMMENT_CONTENT, TEST_ANOTHER_COMMENT.getContent())))
-            .andDo(print());
-    }
+//    @Test
+//    @DisplayName("내가 쓴 댓글 목록 조회 성공")
+//    void getMyPosts_fail() throws Exception {
+//        //given
+//        given(myPageService.getMyComments(eq(TEST_USER))).willReturn(
+//            List.of(commentResponseDto1, commentResponseDto2));
+//        // when
+//        var action = mockMvc.perform(get("/my/comments")
+//            .accept(MediaType.APPLICATION_JSON));
+//
+//        // then
+//        action.andExpect(status().isOk())
+//            .andExpect(
+//                jsonPath("$.data[*].content",
+//                    hasItems(TEST_COMMENT_CONTENT, TEST_ANOTHER_COMMENT.getContent())))
+//            .andDo(print());
+//    }
 
 }

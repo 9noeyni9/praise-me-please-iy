@@ -11,17 +11,17 @@ import lombok.NoArgsConstructor;
 public class MyPostResponseDto {
 
     private Long postId;
-    private String username;
     private String title;
     private String content;
     private LocalDateTime createdAt;
+    private String username;
 
-    public MyPostResponseDto(Long postId, String username, String title, String content,
-        LocalDateTime createdAt) {
+    public MyPostResponseDto(Long postId, String title, String content,
+        LocalDateTime createdAt, String username) {
         this.postId = postId;
-        this.username = username;
         this.title = title;
         this.content = content;
         this.createdAt = createdAt;
+        this.username = username;
     }
 }
