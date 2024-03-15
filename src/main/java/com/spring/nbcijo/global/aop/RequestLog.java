@@ -51,17 +51,6 @@ public class RequestLog {
         buffer.append(getUsernameFromHeader(joinPoint));
         buffer.append("\n=========================================================================================");
 
-
-//        String content = "\n" +
-//                "==========================================================\n" +
-//                "Class Method : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName() + "[" + LocalDateTime.now() + "]\n" +
-//                "Request URL  : " + request.getRequestURL().toString() + "\n" +
-//                "HTTP Method  : " + request.getMethod() + "\n" +
-//                "Request URI  : " + request.getRequestURI() + "\n" +
-//                "IP Address   : " + request.getRemoteAddr() + "\n" +
-//                "Username     : " + getUsernameFromHeader(joinPoint) + "\n" +
-//                "===========================================================";
-
         if (joinPoint.getSignature().getDeclaringType().getSimpleName().contains("controller")) {
             log.info(String.valueOf(buffer));
         } else {
