@@ -30,25 +30,14 @@ public class RequestLog {
         HttpServletRequest request = attributes.getRequest();
         StringBuffer buffer = new StringBuffer();
 
-        buffer.append("\n");
-        buffer.append("=========================================================================================\n");
-        buffer.append("Class Method : ");
-        buffer.append(joinPoint.getSignature().getDeclaringTypeName());
-        buffer.append(".");
-        buffer.append(joinPoint.getSignature().getName());
-        buffer.append("[ ");
-        buffer.append(LocalDateTime.now());
-        buffer.append(" ]\n");
-        buffer.append("Request URL  : ");
-        buffer.append(request.getRequestURL().toString());
-        buffer.append("\nHTTP Method  : ");
-        buffer.append(request.getMethod());
-        buffer.append("\nRequest URI  : ");
-        buffer.append(request.getRequestURI());
-        buffer.append("\nIP Address   : ");
-        buffer.append(request.getRemoteAddr());
-        buffer.append("\nUsername     : ");
-        buffer.append(getUsernameFromHeader(joinPoint));
+        buffer.append("\n").append("=========================================================================================\n");
+        buffer.append("Class Method : ").append(joinPoint.getSignature().getDeclaringTypeName()).append(".").append(joinPoint.getSignature().getName());
+        buffer.append("[ ").append(LocalDateTime.now()).append(" ]\n");
+        buffer.append("Request URL  : ").append(request.getRequestURL().toString());
+        buffer.append("\nHTTP Method  : ").append(request.getMethod());
+        buffer.append("\nRequest URI  : ").append(request.getRequestURI());
+        buffer.append("\nIP Address   : ").append(request.getRemoteAddr());
+        buffer.append("\nUsername     : ").append(getUsernameFromHeader(joinPoint));
         buffer.append("\n=========================================================================================");
 
         if (joinPoint.getSignature().getDeclaringType().getSimpleName().contains("controller")) {
