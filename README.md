@@ -47,7 +47,7 @@
 
 ## 와이어 프레임
 
-!![Pasted image 20240229093249](https://github.com/nbc-ijo/nbc-ijo/assets/135244018/c0f4b1e7-fbc9-47f1-98da-c04e5f57c9ce)
+![Pasted image 20240229093249](https://github.com/nbc-ijo/nbc-ijo/assets/135244018/c0f4b1e7-fbc9-47f1-98da-c04e5f57c9ce)
 
 ## API 명세
 
